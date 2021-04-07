@@ -16,3 +16,8 @@ const MenuItem = ({title, imageUrl, size, history, linkUrl, match}) => (
 );
 
 export default withRouter(MenuItem);
+//for conventiontional passign off prop we have to pass history object from homepage to directory 
+//and directory to menu item which is called "prop tunneling"
+//"withRouter" is a HOC of "react-router-dom" which returns as the powered component in form of MenuItem
+//which allow us to access routing variables like match and history which in our case accessible to Homepage
+//only if not passed through "prop tunneling"
