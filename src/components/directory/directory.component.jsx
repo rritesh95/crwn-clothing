@@ -2,29 +2,26 @@ import React from 'react';
 
 import MenuItem from '../menu-item/menu-item.component';
 
+import { connect } from 'react-redux';
+import { selectDirectorySections } from '../../redux/directory/directory.selector';
+import { createStructuredSelector } from 'reselect';
+
 import './directory.styles.scss';
-import SECTIONS_DATA from "./sections.data.js";
 
-class Directory extends React.Component{
-    constructor(){
-        super();
-
-        this.state = {
-            sections : SECTIONS_DATA              
-        };
+const Directory = ({sections}) => (
+    <div className="directory-menu">
+    {
+        sections.map(({id, ...OtherSectionParams}) => (
+            <MenuItem key={id} {...OtherSectionParams}/>
+        ))
     }
+    </div>
+);
 
-    render(){
-        return (
-            <div className="directory-menu">
-            {
-                this.state.sections.map(({id, ...OtherSectionParams}) => (
-                    <MenuItem key={id} {...OtherSectionParams}/>
-                ))
-            }
-            </div>
-        )
-    }
-}
+const mapStateToProps = createStructuredSelector({
+    sections : selectDirectorySections
+});
 
-export default Directory;
+export default connect(
+    mapStateToProps
+)(Directory);
