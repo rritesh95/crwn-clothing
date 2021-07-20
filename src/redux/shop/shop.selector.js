@@ -31,6 +31,16 @@ createSelector(
     collections => (collections ? collections[collectioUrlParam] : null)
 )
 
+export const selectIsCollectionFetching = createSelector(
+    [selectShop],
+    shop => shop.isFetching
+)
+
+export const selectIsCollectionsLoaded = createSelector(
+    [selectShop],
+    shop => !!shop.collections
+)
+
 //to memoize "selectCollection" we can use lodash.memoize, import lodash.memoize and
 // wrap "selectCollection" in memoize like memoize( collectioUrlParam =>
 //createSelector(
