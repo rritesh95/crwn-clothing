@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Route } from 'react-router-dom';
 
@@ -8,43 +8,48 @@ import CollectionPageContainer from '../collection/collection.container';
 import { connect } from 'react-redux';
 import { fetchCollectionsStart } from '../../redux/shop/shop.action';
 
-class ShopPage extends React.Component {
-    unsubscribeFromSnapshot = null;
+//class ShopPage extends React.Component {
+const ShopPage = ({ fetchCollectionsStart, match }) => {
+    //unsubscribeFromSnapshot = null;
 
-    componentDidMount(){
-        const { fetchCollectionsStart } = this.props;
-        fetchCollectionsStart();
-        //const collectionRef = firestore.collection('collections');
+    useEffect(() => {
+        fetchCollectionsStart()
+    }, [fetchCollectionsStart]);
 
-        //REST API
-        // fetch(
-        //     'https://firestore.googleapis.com/v1/projects/crwn-db-90478/databases/(default)/documents/collections'
-        // ).then(response => response.json())
-        // .then(collections => console.log("collections", collections))
+    // componentDidMount(){
+    //     const { fetchCollectionsStart } = this.props;
+    //     fetchCollectionsStart();
+    //     //const collectionRef = firestore.collection('collections');
 
-        //Promise pattern
-        // collectionRef.get().then( snapshot => {
-        //     const collectionsMap = convertCollectionsSnapshotToMap(snapshot);    
-        //     updateCollections(collectionsMap);
-        //     this.setState({ loading : false});
-        // })
+    //     //REST API
+    //     // fetch(
+    //     //     'https://firestore.googleapis.com/v1/projects/crwn-db-90478/databases/(default)/documents/collections'
+    //     // ).then(response => response.json())
+    //     // .then(collections => console.log("collections", collections))
 
-        //Observable pattern
-        // collectionRef.onSnapshot(async snapshot => {
-        //     const collectionsMap = convertCollectionsSnapshotToMap(snapshot);    
-        //     updateCollections(collectionsMap);
-        //     this.setState({ loading : false});
-        // })
+    //     //Promise pattern
+    //     // collectionRef.get().then( snapshot => {
+    //     //     const collectionsMap = convertCollectionsSnapshotToMap(snapshot);    
+    //     //     updateCollections(collectionsMap);
+    //     //     this.setState({ loading : false});
+    //     // })
 
-        //we will get collection values set in redux "collections" only when
-        //this component will execute, if we have some component that needs
-        //this collection data and have no dependency on this component then
-        //we have to repeat the same code over there also, to avoid it we can
-        //move this "collections" load to redux
-    }
+    //     //Observable pattern
+    //     // collectionRef.onSnapshot(async snapshot => {
+    //     //     const collectionsMap = convertCollectionsSnapshotToMap(snapshot);    
+    //     //     updateCollections(collectionsMap);
+    //     //     this.setState({ loading : false});
+    //     // })
 
-    render(){
-        const { match } = this.props;
+    //     //we will get collection values set in redux "collections" only when
+    //     //this component will execute, if we have some component that needs
+    //     //this collection data and have no dependency on this component then
+    //     //we have to repeat the same code over there also, to avoid it we can
+    //     //move this "collections" load to redux
+    // }
+
+    //render(){
+    //    const { match } = this.props;
 
         return (
             <div className="shop-page">
@@ -54,7 +59,7 @@ class ShopPage extends React.Component {
                 component={CollectionPageContainer} />
             </div>
         );
-    }
+    //}
 }
 
 const mapDispatchToProps = dispatch => ({

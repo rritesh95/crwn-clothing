@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 
 import HomePage from './pages/homepage/homepage.component';
@@ -17,42 +17,45 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selector';
 import { checkUserSession } from './redux/user/user.action';
 
-class App extends React.Component {
-
+//class App extends React.Component {
+const App = ({ checkUserSession, currentUser }) => {
   //unsubscribeFromAuth = null;
-
-  componentDidMount(){
-    const { checkUserSession } = this.props;
+  useEffect(() => {
     checkUserSession();
-    //const { setCurrentUser, collectionsArray } = this.props;
-    //const { setCurrentUser } = this.props;
+  }, [checkUserSession]);
 
-    // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-    //   if(userAuth){
-    //     const userRef = await createUserProfileDocument(userAuth);
+  //componentDidMount(){
+    // const { checkUserSession } = this.props;
+    // checkUserSession();
+    // //const { setCurrentUser, collectionsArray } = this.props;
+    // //const { setCurrentUser } = this.props;
 
-    //     userRef.onSnapshot( snapshot => {
-    //       setCurrentUser({
-    //           id : userRef.id,
-    //           ...snapshot.data()
-    //       });
-    //     });
-    //   }
+    // // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    // //   if(userAuth){
+    // //     const userRef = await createUserProfileDocument(userAuth);
 
-    //   setCurrentUser(userAuth);
-    //   //to load shop data in firebase 1st time
-    //   // addCollectionAndDocuments(
-    //   //   "collections", 
-    //   //   collectionsArray.map(({ title, items }) => ({ title, items}))
-    //   // );
-    // });
-  }
+    // //     userRef.onSnapshot( snapshot => {
+    // //       setCurrentUser({
+    // //           id : userRef.id,
+    // //           ...snapshot.data()
+    // //       });
+    // //     });
+    // //   }
+
+    // //   setCurrentUser(userAuth);
+    // //   //to load shop data in firebase 1st time
+    // //   // addCollectionAndDocuments(
+    // //   //   "collections", 
+    // //   //   collectionsArray.map(({ title, items }) => ({ title, items}))
+    // //   // );
+    // // });
+  //}
 
   // componentWillUnmount(){
   //   this.unsubscribeFromAuth();
   // }
 
-  render(){
+  //render(){
     return (
       <div>
         <Header/>
@@ -61,14 +64,14 @@ class App extends React.Component {
           <Route path="/shop" component={ShopPage}></Route>
           <Route path="/checkout" component={ChekoutPage}></Route>
           <Route exact path="/signIn"
-            render= { () => this.props.currentUser ? (
+            render= { () => currentUser ? (
               <Redirect to="/" />) : (
               <SignInAndSignUpPage />)
             } />
         </Switch>
       </div>
     );
-  }
+  //}
   
 }
 
