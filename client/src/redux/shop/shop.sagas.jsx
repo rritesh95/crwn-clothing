@@ -21,7 +21,7 @@ export function* fetchCollectionAsync(){
 }
 
 export function* fetchCollectionStart(){
-    yield takeEvery(    //check every actions that are coming in and check for "FETCH_COLLECTIONS_START"
+    yield takeEvery(    //check every "FETCH_COLLECTIONS_START" actions
                         // to call another generator
         ShopActionTypes.FETCH_COLLECTIONS_START,
         fetchCollectionAsync
