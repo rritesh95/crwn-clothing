@@ -2,7 +2,8 @@ import React, { useEffect, Suspense, lazy } from 'react';
 
 import { Route } from 'react-router-dom';
 
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux'; //commented to use useSelector and useDispatch hooks
+import { useDispatch } from 'react-redux';
 import { fetchCollectionsStart } from '../../redux/shop/shop.action';
 
 import Spinner from '../../components/spinner/spinner.component';
@@ -11,12 +12,14 @@ const CollectionOverviewContainer = lazy(() => import('../../components/collecti
 const CollectionPageContainer = lazy(() => import('../collection/collection.container'));
 
 //class ShopPage extends React.Component {
-const ShopPage = ({ fetchCollectionsStart, match }) => {
+const ShopPage = ({ match }) => {
     //unsubscribeFromSnapshot = null;
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        fetchCollectionsStart()
-    }, [fetchCollectionsStart]);
+        dispatch(fetchCollectionsStart());
+    }, [dispatch]);
 
     // componentDidMount(){
     //     const { fetchCollectionsStart } = this.props;
@@ -66,11 +69,13 @@ const ShopPage = ({ fetchCollectionsStart, match }) => {
     //}
 }
 
-const mapDispatchToProps = dispatch => ({
-    fetchCollectionsStart : () => dispatch(fetchCollectionsStart())
-})
+// const mapDispatchToProps = dispatch => ({
+//     fetchCollectionsStart : () => dispatch(fetchCollectionsStart())
+// })
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(ShopPage);
+// export default connect(
+//     null,
+//     mapDispatchToProps
+// )(ShopPage);
+
+export default ShopPage;
